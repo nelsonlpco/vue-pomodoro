@@ -1,0 +1,32 @@
+$primary: #DB5435;
+$primaryDark: #9C3C25;
+$textColor: #FFFBFA;
+$primaryBackground: #2E2E2E;
+
+@function rem($size) {
+    @return $size / 16px * 1rem;
+}
+
+.title {
+    color: $textColor;
+    font-weight: bold;
+    font-size: rem(34px);
+}
+
+.subtitle {
+    color: $textColor;
+    font-weight: bold;
+    font-size: rem(24px);
+}
+
+.text {
+    color: $textColor;
+    font-size: rem(18px);
+}
+
+.timer-text{ 
+    color: $textColor;
+    font-weight: bold;
+    font-size: rem(60px);
+}
+

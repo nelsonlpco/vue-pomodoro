@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ButtonPlay />
+    <ButtonStop />
+    <ButtonConfig />
+    <ButtonConfirm />
+    <ButtonCancel />
+    <DisplayCircleTimer />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import ButtonPlay from '@/components/cells/buttons/ButtonPlay.vue';
+import ButtonStop from '@/components/cells/buttons/ButtonStop.vue';
+import ButtonConfig from '@/components/cells/buttons/ButtonConfig.vue';
+import ButtonConfirm from '@/components/cells/buttons/ButtonConfirm.vue';
+import ButtonCancel from '@/components/cells/buttons/ButtonCancel.vue';
+import DisplayCircleTimer from '@/components/molecules/DisplayCircleTimer.vue';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
+    ButtonPlay,
+    ButtonStop,
+    ButtonConfig,
+    ButtonConfirm,
+    ButtonCancel,
+    DisplayCircleTimer,
+  },
+  methods: {
+    onClick() {
+      this.$router.push({ name: 'Pomodoro', params: { type: 'work' } });
+    },
   },
 };
 </script>
