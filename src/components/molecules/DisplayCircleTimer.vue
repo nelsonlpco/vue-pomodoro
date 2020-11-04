@@ -25,7 +25,7 @@
             :cx="cx"
             :cy="cy"
             :r="r"
-            :stroke="actionColor"
+            stroke="#da755e"
             stroke-linecap="round"
             stroke-width="10"
             fill="none"

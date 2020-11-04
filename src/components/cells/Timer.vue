@@ -1,10 +1,15 @@
 <template>
-  <div class="timer">Timer: {{minutes}}:{{seconds}}</div>
+    <TimerText>{{minutes}}:{{seconds}}</TimerText>
 </template>
 
 <script>
+import TimerText from '@/components/molecules/TimerText.vue';
+
 export default {
   name: 'Timer',
+  components: {
+    TimerText,
+  },
   props: {
     time: {
       type: Number,
@@ -55,9 +60,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .timer {
-    color: var(--app-color-text);
-  }
-</style>
