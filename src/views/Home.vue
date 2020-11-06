@@ -1,23 +1,33 @@
 <template>
   <div class="home">
-    <Title>Pomodoro</Title>
-    <WatchDisplay />
+    <WatchDisplay :isStarted="isStarted" />
+      <Container margin="26px 0 0 0">
+    <ButtonStartStop @click="onClick"  :isStarted="isStarted"/>
+  </Container>
   </div>
 </template>
 
 <script>
-import Title from '@/components/molecules/Title.vue';
 import WatchDisplay from '@/components/cells/WatchDisplay/WatchDisplay.vue';
+import Container from '@/components/molecules/Container.vue';
+import ButtonStartStop from '@/components/cells/buttons/ButtonStartStop.vue';
 
 export default {
   name: 'Home',
   components: {
+    Container,
     WatchDisplay,
-    Title,
+    ButtonStartStop,
+  },
+  data() {
+    return {
+      isStarted: false,
+      status: 'work',
+    };
   },
   methods: {
     onClick() {
-      this.$router.push({ name: 'Pomodoro', params: { type: 'work' } });
+      this.isStarted = !this.isStarted;
     },
   },
 };

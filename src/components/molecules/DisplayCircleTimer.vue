@@ -2,7 +2,7 @@
   <div class="timer">
       <div class="timer-container">
         <svg xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMinYMid meet"
+          preserveAspectRatio="xMinYMid"
           :width="size"
           :height="size">
           <defs>
@@ -58,6 +58,10 @@ import theme from '@/theme/theme';
 export default {
   name: 'DisplayCircleTimer',
   props: {
+    time: {
+      type: Number,
+      default: 10,
+    },
     bgColor: {
       type: String,
       default: theme.colors.primaryDark,
@@ -66,17 +70,13 @@ export default {
       type: String,
       default: theme.colors.primary,
     },
-    seconds: {
-      type: Number,
-      default: 260,
-    },
     size: {
       type: Number,
       default: 260,
     },
-    start: {
+    isStarted: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   computed: {
@@ -84,20 +84,25 @@ export default {
     cy() { return this.$props.size / 2; },
     r() { return this.$props.size / 2 - 10; },
   },
-  data() {
-    return { animationStyle: '' };
-  },
-  methods: {
-    playAnimation() {
-      if (this.$props.start) {
-        this.animationStyle = `animation: dash ${this.$props.seconds}s linear forwards`;
-      } else {
-        this.animationStyle = '';
-      }
+  watch: {
+    isStarted(newVal) {
+      this.playAnimation(newVal);
     },
   },
-  mounted() {
-    this.playAnimation();
+  data() {
+    return { animationStyle: {} };
+  },
+  methods: {
+    playAnimation(isStarted) {
+      if (isStarted) {
+        this.animationStyle = {
+          animation: `dash ${this.$props.time + 2}s linear none`,
+          animationDelay: '1s',
+        };
+      } else {
+        this.animationStyle = {};
+      }
+    },
   },
 };
 </script>

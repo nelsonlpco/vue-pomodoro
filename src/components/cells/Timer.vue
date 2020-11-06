@@ -15,7 +15,12 @@ export default {
       type: Number,
       default: 1200,
     },
+    isStarted: {
+      type: Boolean,
+      default: false,
+    },
   },
+
   computed: {
     minutes() {
       const minutes = Math.floor(this.timeInSeconds / 60);
@@ -37,7 +42,6 @@ export default {
         if (!this.timeInSeconds) {
           window.clearInterval(countdownTimer);
           this.setTime();
-          this.$router.push({ name: 'Pomodoro', params: { type: 'rest' } });
           return;
         }
 
