@@ -1,16 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-
-console.log('baseusel', process.env.BASE_URL);
+import Pomodoro from '@/views/pomodoro/Pomodoro.vue';
 
 Vue.use(VueRouter);
+
+export const Routes = {
+  pomodoro: 'Pomodoro',
+  configuration: 'Configuration',
+};
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: Routes.pomodoro,
+    component: Pomodoro,
   },
   {
     path: '/about',

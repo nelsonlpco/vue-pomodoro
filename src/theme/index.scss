@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import './theme.scss';
+@import './animations.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $primaryBackground;
+  font-family:'Roboto', Avenir, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+    color: $textColor;
+    font-weight: bold;
+    font-size: $font-size-title;
+}
+
+.subtitle {
+    color: $textColor;
+    font-weight: bold;
+    font-size: $font-size-subtitle;
+}
+
+.text {
+    color: $textColor;
+    font-size: $font-size-text;
+}
+
+.timer-text{ 
+    color: $textColor;
+    font-weight: bold;
+    font-size: $font-size-timer-text;
+}

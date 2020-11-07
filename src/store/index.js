@@ -1,5 +1,5 @@
-const workTime = 10;
-const intervalTime = 5;
+const workTime = 1800;
+const intervalTime = 1200;
 const animations = {
   charge: 'charge',
   recharge: 'recharge',

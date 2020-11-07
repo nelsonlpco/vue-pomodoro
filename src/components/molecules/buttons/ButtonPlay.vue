@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import IconPlay from '@/components/molecules/icons/IconPlay.vue';
+import IconPlay from '@/components/atoms/icons/IconPlay.vue';
 import ButtonBase from './ButtonBase.vue';
 
 export default {

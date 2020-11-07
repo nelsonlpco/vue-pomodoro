@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import IconStop from '@/components/molecules/icons/IconStop.vue';
+import IconStop from '@/components/atoms/icons/IconStop.vue';
 import ButtonBase from './ButtonBase.vue';
 
 export default {

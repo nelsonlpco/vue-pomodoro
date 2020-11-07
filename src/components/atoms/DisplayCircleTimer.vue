@@ -21,7 +21,7 @@
           />
           <circle
             filter="url(#f1)"
-            :style="store.state.animation"
+            :style="animationStyle"
             :cx="cx"
             :cy="cy"
             :r="r"
@@ -33,7 +33,7 @@
             stroke-dashoffset="1000"
           />
           <circle
-            :style="store.state.animation"
+            :style="animationStyle"
             :cx="cx"
             :cy="cy"
             :r="r"
@@ -54,7 +54,6 @@
 
 <script>
 import theme from '@/theme/theme';
-import Store from '@/store';
 
 export default {
   name: 'DisplayCircleTimer',
@@ -71,16 +70,15 @@ export default {
       type: Number,
       default: 260,
     },
+    animationStyle: {
+      type: Object,
+      default() { return { animation: '' }; },
+    },
   },
   computed: {
     cx() { return this.$props.size / 2; },
     cy() { return this.$props.size / 2; },
     r() { return this.$props.size / 2 - 10; },
-  },
-  data() {
-    return {
-      store: Store,
-    };
   },
 };
 </script>

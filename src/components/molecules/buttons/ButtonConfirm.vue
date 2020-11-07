@@ -1,18 +1,18 @@
 <template>
   <ButtonBase>
-    <IconCancel />
+    <IconConfirm />
   </ButtonBase>
 </template>
 
 <script>
-import IconCancel from '@/components/molecules/icons/IconCancel.vue';
+import IconConfirm from '@/components/atoms/icons/IconOk.vue';
 import ButtonBase from './ButtonBase.vue';
 
 export default {
-  name: 'ButtonCancel',
+  name: 'ButtonConfirm',
   components: {
     ButtonBase,
-    IconCancel,
+    IconConfirm,
   },
 };
 </script>
