@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0668458363c02ad7fb8b",
-    "url": "/vue-pomodoro/css/app.93cb7f18.css"
+    "revision": "34bb086525f6316c39b1",
+    "url": "/vue-pomodoro/css/app.745c43f1.css"
   },
   {
-    "revision": "a1517c13b63acd0986c91d42193d9c69",
+    "revision": "f3910dc92129587c0a12f79f14b4b6f1",
     "url": "/vue-pomodoro/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vue-pomodoro/js/about.277973fb.js"
   },
   {
-    "revision": "0668458363c02ad7fb8b",
-    "url": "/vue-pomodoro/js/app.8af8be62.js"
+    "revision": "34bb086525f6316c39b1",
+    "url": "/vue-pomodoro/js/app.6406a480.js"
   },
   {
     "revision": "082041735678cf4950a0",
