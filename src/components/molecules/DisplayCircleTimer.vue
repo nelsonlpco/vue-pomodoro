@@ -21,7 +21,7 @@
           />
           <circle
             filter="url(#f1)"
-            :style="animationStyle"
+            :style="store.state.animation"
             :cx="cx"
             :cy="cy"
             :r="r"
@@ -33,7 +33,7 @@
             stroke-dashoffset="1000"
           />
           <circle
-            :style="animationStyle"
+            :style="store.state.animation"
             :cx="cx"
             :cy="cy"
             :r="r"
@@ -54,14 +54,11 @@
 
 <script>
 import theme from '@/theme/theme';
+import Store from '@/store';
 
 export default {
   name: 'DisplayCircleTimer',
   props: {
-    time: {
-      type: Number,
-      default: 10,
-    },
     bgColor: {
       type: String,
       default: theme.colors.primaryDark,
@@ -74,40 +71,21 @@ export default {
       type: Number,
       default: 260,
     },
-    isStarted: {
-      type: Boolean,
-      default: false,
-    },
   },
   computed: {
     cx() { return this.$props.size / 2; },
     cy() { return this.$props.size / 2; },
     r() { return this.$props.size / 2 - 10; },
   },
-  watch: {
-    isStarted(newVal) {
-      this.playAnimation(newVal);
-    },
-  },
   data() {
-    return { animationStyle: {} };
-  },
-  methods: {
-    playAnimation(isStarted) {
-      if (isStarted) {
-        this.animationStyle = {
-          animation: `dash ${this.$props.time + 2}s linear none`,
-          animationDelay: '1s',
-        };
-      } else {
-        this.animationStyle = {};
-      }
-    },
+    return {
+      store: Store,
+    };
   },
 };
 </script>
 
-<style lang="scss" embed>
+<style lang="scss" scoped>
   .timer {
     display: flex;
     justify-content: center;
@@ -121,21 +99,13 @@ export default {
     top:0;
     left: 0;
   }
-
   .timer-container {
     transform: rotate(-90deg);
     z-index: -1;
     position: absolute;
   }
-
   .timer-display {
     z-index: 10;
     color: white;
-  }
-
-  @keyframes dash {
-    to {
-      stroke-dashoffset: 0;
-    }
   }
 </style>

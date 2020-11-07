@@ -1,25 +1,25 @@
 <template>
-  <ButtonBase @click="onClick">
-    <div class="play-button" :class="{show: !isStarted, hide: isStarted}">
-      <IconPlay width="33"/>
+  <div class="scene">
+    <div class="card" :class="{'is-flipped':isStarted}">
+      <div class="card__face card__face--front">
+        <ButtonPlay @click="onClick" />
+      </div>
+      <div class="card__face card__face--back">
+        <ButtonStop @click="onClick" />
+      </div>
     </div>
-    <div class="play-button hided" :class="{show: isStarted, hide: !isStarted}">
-      <IconStop />
-    </div>
-  </ButtonBase>
+  </div>
 </template>
 
 <script>
-import IconStop from '@/components/molecules/icons/IconStop.vue';
-import IconPlay from '@/components/molecules/icons/IconPlay.vue';
-import ButtonBase from './ButtonBase.vue';
+import ButtonPlay from './ButtonPlay.vue';
+import ButtonStop from './ButtonStop.vue';
 
 export default {
   name: 'ButtonStartStop',
   components: {
-    IconStop,
-    IconPlay,
-    ButtonBase,
+    ButtonPlay,
+    ButtonStop,
   },
   props: {
     isStarted: {
@@ -36,34 +36,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .play-button {
+  .scene {
+    width: 80px;
+    height: 80px;
+    perspective: 600px;
+  }
+  .card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+  }
+
+  .card__face {
     position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
   }
 
-  .hided {
-    opacity: 0;
+  .card__face--back {
+    transform: rotateY(180deg);
   }
 
-  .show {
-    animation: showIcon .5s ease-out forwards;
-  }
-
-  .hide {
-    animation: hideIcon .5s ease-out forwards;
-  }
-
-  @keyframes showIcon {
-    to {
-      opacity: 1;
+  .card.is-flipped {
+      transform: rotateY(180deg);
     }
-  }
-
-  @keyframes hideIcon {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
 </style>

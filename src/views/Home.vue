@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <WatchDisplay :isStarted="isStarted" />
-      <Container margin="26px 0 0 0">
-    <ButtonStartStop @click="onClick"  :isStarted="isStarted"/>
-  </Container>
+    <WatchDisplay />
+    <Container margin="26px 0 0 0">
+      <ButtonStartStop @click="onClick" :isStarted="store.state.isStarted"/>
+    </Container>
   </div>
 </template>
 
@@ -11,6 +11,8 @@
 import WatchDisplay from '@/components/cells/WatchDisplay/WatchDisplay.vue';
 import Container from '@/components/molecules/Container.vue';
 import ButtonStartStop from '@/components/cells/buttons/ButtonStartStop.vue';
+
+import Store from '@/store';
 
 export default {
   name: 'Home',
@@ -21,14 +23,14 @@ export default {
   },
   data() {
     return {
-      isStarted: false,
-      status: 'work',
+      store: Store,
     };
   },
   methods: {
     onClick() {
-      this.isStarted = !this.isStarted;
+      this.store.startStop();
     },
   },
 };
+
 </script>

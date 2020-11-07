@@ -32,4 +32,18 @@ body {
   align-items: center;
 }
 
+@keyframes charge {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes recharge{
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
 </style>

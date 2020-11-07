@@ -2,7 +2,7 @@
   <Container>
     <Title :class="{upTitle: isStarted, downTitle: !isStarted}">Pomodoro</Title>
     <Container :class="{upDisplay: isStarted, downDisplay: !isStarted}">
-      <Timer v-if="isStarted" :isStarted="isStarted" :time="time" />
+      <Timer v-if="isStarted" />
       <Subtitle v-if="isStarted">{{this.legend}}</Subtitle>
     </Container>
   </Container>
@@ -23,17 +23,13 @@ export default {
     Timer,
   },
   props: {
-    time: {
-      type: Number,
-      default: 10,
+    isStarted: {
+      type: Boolean,
+      default: false,
     },
     legend: {
       type: String,
       default: '',
-    },
-    isStarted: {
-      type: Boolean,
-      default: false,
     },
   },
 };

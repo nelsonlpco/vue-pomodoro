@@ -1,5 +1,5 @@
 <template>
-  <ButtonBase>
+  <ButtonBase @click="onClick">
     <IconPlay width="33"/>
   </ButtonBase>
 </template>
@@ -13,6 +13,11 @@ export default {
   components: {
     ButtonBase,
     IconPlay,
+  },
+  methods: {
+    onClick() {
+      this.$emit('click');
+    },
   },
 };
 </script>

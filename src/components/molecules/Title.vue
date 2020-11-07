@@ -10,7 +10,6 @@ export default {
   props: {
     margin: {
       type: String,
-      default: '0 0 26px 0',
     },
   },
   data() {
