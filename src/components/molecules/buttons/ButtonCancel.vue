@@ -1,5 +1,5 @@
 <template>
-  <ButtonBase>
+  <ButtonBase @click="onClickHandler">
     <IconCancel />
   </ButtonBase>
 </template>
@@ -13,6 +13,11 @@ export default {
   components: {
     ButtonBase,
     IconCancel,
+  },
+  methods: {
+    onClickHandler() {
+      this.$emit('click');
+    },
   },
 };
 </script>

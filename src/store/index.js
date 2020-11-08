@@ -1,5 +1,5 @@
-const workTime = 1800;
-const intervalTime = 1200;
+const workTime = 10;
+const intervalTime = 5;
 const animations = {
   charge: 'charge',
   recharge: 'recharge',
@@ -15,6 +15,32 @@ export default {
     isStarted: false,
     animation: { animation: '' },
     legend: 'Trabalho',
+    playConfig: {
+      middleOfContainer: 0,
+      configAnimation: {
+        transform: undefined,
+        opacity: 1,
+        transition: undefined,
+      },
+      playAnimation: {
+        transform: undefined,
+        transition: undefined,
+      },
+    },
+  },
+  setPlayConfigMiddleOfContainer(middleOfContainer) {
+    this.state.playConfig.middleOfContainer = middleOfContainer;
+  },
+  playConfigAnimation() {
+    this.state.playConfig.configAnimation = {
+      transform: `translateX(${(this.state.isStarted ? 1 : 0) * this.state.playConfig.middleOfContainer}px)`,
+      opacity: this.state.isStarted ? 0 : 1,
+      transition: 'transform 0.500s, opacity 0.500s',
+    };
+    this.state.playConfig.playAnimation = {
+      transform: `translateX(${(this.state.isStarted ? -1 : 0) * this.state.playConfig.middleOfContainer}px)`,
+      transition: 'transform 0.500s',
+    };
   },
   setLegend() {
     this.state.legend = this.state.isWorking ? 'Trabalho' : 'Intervalo';
@@ -34,6 +60,7 @@ export default {
     this.setTimer();
     this.setLegend();
     this.setDisplayAnimation();
+    this.playConfigAnimation();
   },
   start() {
     this.state.isStarted = true;
@@ -54,6 +81,7 @@ export default {
     this.state.currentTime = 0;
     this.state.isWorking = false;
     this.state.isStarted = false;
+    this.playConfigAnimation();
   },
   startStop() {
     if (this.state.isStarted) {

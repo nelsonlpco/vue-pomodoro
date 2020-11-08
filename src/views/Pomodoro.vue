@@ -2,7 +2,7 @@
   <Container>
     <Clock />
     <Container margin="26px 0 0 0">
-      <ButtonStartStop @click="onClick" :isStarted="isStarted"/>
+      <PlayConfig @click="onClick"/>
     </Container>
   </Container>
 </template>
@@ -10,14 +10,14 @@
 <script>
 import Clock from '@/components/organisms/Clock.vue';
 import Container from '@/components/atoms/Container.vue';
-import ButtonStartStop from '@/components/molecules/buttons/ButtonStartStop.vue';
+import PlayConfig from '@/components/organisms/PlayConfig.vue';
 
 export default {
   name: 'Pomodoro',
   components: {
     Container,
     Clock,
-    ButtonStartStop,
+    PlayConfig,
   },
   inject: ['store'],
   computed: {

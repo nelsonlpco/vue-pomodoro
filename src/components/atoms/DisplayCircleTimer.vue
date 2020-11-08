@@ -29,8 +29,8 @@
             stroke-linecap="round"
             stroke-width="10"
             fill="none"
-            stroke-dasharray="1000"
-            stroke-dashoffset="1000"
+            stroke-dasharray="754"
+            stroke-dashoffset="754"
           />
           <circle
             :style="animationStyle"
@@ -41,8 +41,8 @@
             stroke-linecap="round"
             stroke-width="10"
             fill="none"
-            stroke-dasharray="1000"
-            stroke-dashoffset="1000"
+            stroke-dasharray="754"
+            stroke-dashoffset="754"
           />
         </svg>
       </div>

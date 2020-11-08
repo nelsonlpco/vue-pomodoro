@@ -26,6 +26,10 @@ export default {
       type: String,
       default: '0 0 0 0',
     },
+    width: {
+      type: String,
+      required: false,
+    },
   },
   data() {
     return {
@@ -36,6 +40,7 @@ export default {
         flex: this.$props.flex,
         flexDirection: this.$props.direction,
         margin: this.$props.margin,
+        width: this.$props.width,
       },
     };
   },
