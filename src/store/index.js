@@ -1,5 +1,3 @@
-const workTime = 10;
-const intervalTime = 5;
 const animations = {
   charge: 'charge',
   recharge: 'recharge',
@@ -9,6 +7,8 @@ let intervalRef = null;
 
 export default {
   state: {
+    workTime: 60,
+    intervalTime: 30,
     time: 0,
     currentTime: 0,
     isWorking: false,
@@ -28,6 +28,12 @@ export default {
       },
     },
   },
+  setWorkTime(time) {
+    this.state.workTime = time;
+  },
+  setIntervalTime(time) {
+    this.state.intervalTime = time;
+  },
   setPlayConfigMiddleOfContainer(middleOfContainer) {
     this.state.playConfig.middleOfContainer = middleOfContainer;
   },
@@ -46,7 +52,7 @@ export default {
     this.state.legend = this.state.isWorking ? 'Trabalho' : 'Intervalo';
   },
   setTimer() {
-    const timer = this.state.isWorking ? intervalTime : workTime;
+    const timer = this.state.isWorking ? this.state.intervalTime : this.state.workTime;
     this.state.isWorking = !this.state.isWorking;
     this.state.currentTime = timer;
     this.state.time = timer;

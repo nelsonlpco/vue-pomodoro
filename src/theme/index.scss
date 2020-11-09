@@ -4,6 +4,17 @@
 
 * {
   box-sizing: border-box;
+  :focus {
+    outline: none;
+  }
+
+  ::selection{
+    background: transparent;
+  }
+
+  ::-moz-selection{
+    background: transparent;
+  }
 }
 
 body {

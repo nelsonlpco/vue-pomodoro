@@ -5,17 +5,20 @@
     </Container>
     <Container margin="0 0 58px 0">
       <Subtitle>Tempo de trabalho</Subtitle>
-      <Time>00:00</Time>
+      <TimeInput :minutes="minutes" :seconds="seconds" @keyup="changeWorkTime" />
     </Container>
     <Container margin="0 0 58px 0">
       <Subtitle>Tempo de descanso</Subtitle>
-      <Time>00:00</Time>
+      <TimeInput
+        :minutes="intervalMinutes"
+        :seconds="intervalSeconds"
+        @keyup="changeIntervalTime" />
     </Container>
     <Container direction="row">
       <Container margin="0 79px 0 0">
         <ButtonCancel @click="cancelHandler" />
       </Container>
-      <ButtonConfirm />
+      <ButtonConfirm @click="confirmHandler" />
     </Container>
   </Container>
 </template>
@@ -24,24 +27,57 @@
 import Container from '@/components/atoms/Container.vue';
 import Title from '@/components/atoms/Title.vue';
 import Subtitle from '@/components/atoms/Subtitle.vue';
-import Time from '@/components/atoms/Time.vue';
 import ButtonCancel from '@/components/molecules/buttons/ButtonCancel.vue';
 import ButtonConfirm from '@/components/molecules/buttons/ButtonConfirm.vue';
+import TimeInput from '@/components/molecules/TimeInput.vue';
 
 export default {
   name: 'Configurations',
+  inject: ['store'],
   components: {
     Container,
     Title,
     Subtitle,
-    Time,
     ButtonCancel,
     ButtonConfirm,
+    TimeInput,
+  },
+  computed: {
+    minutes() {
+      return Math.floor(this.store.state.workTime / 60);
+    },
+    seconds() {
+      return Math.floor(this.store.state.workTime % 60);
+    },
+    intervalMinutes() {
+      return Math.floor(this.store.state.intervalTime / 60);
+    },
+    intervalSeconds() {
+      return Math.floor(this.store.state.intervalTime % 60);
+    },
+  },
+  data() {
+    return {
+      inputedTime: 0,
+    };
   },
   methods: {
     cancelHandler() {
+      this.store.setWorkTime(this.inputedTime);
       this.$router.push('/');
     },
+    confirmHandler() {
+      this.$router.push('/');
+    },
+    changeWorkTime(v) {
+      this.store.setWorkTime(Number(v));
+    },
+    changeIntervalTime(v) {
+      this.store.setIntervalTime(Number(v));
+    },
+  },
+  mounted() {
+    this.inputedTime = this.store.state.workTime;
   },
 };
 </script>

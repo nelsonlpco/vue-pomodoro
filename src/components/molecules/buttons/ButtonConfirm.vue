@@ -1,5 +1,5 @@
 <template>
-  <ButtonBase>
+  <ButtonBase @click="onClick">
     <IconConfirm />
   </ButtonBase>
 </template>
@@ -13,6 +13,11 @@ export default {
   components: {
     ButtonBase,
     IconConfirm,
+  },
+  methods: {
+    onClick() {
+      this.$emit('click');
+    },
   },
 };
 </script>
