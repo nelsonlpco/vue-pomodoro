@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vue-pomodoro/precache-manifest.ed3817a27d72c64e7b265e8bd8d23ca4.js"
+  "/vue-pomodoro/precache-manifest.b2610016cd701395300d1403c07c9b22.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue-pomodoro"});
