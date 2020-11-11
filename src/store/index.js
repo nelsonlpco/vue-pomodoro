@@ -1,3 +1,5 @@
+import notifyManager from './notificationManager';
+
 const animations = {
   charge: 'charge',
   recharge: 'recharge',
@@ -7,8 +9,8 @@ let intervalRef = null;
 
 export default {
   state: {
-    workTime: 60,
-    intervalTime: 30,
+    workTime: 10,
+    intervalTime: 5,
     time: 0,
     currentTime: 0,
     isWorking: false,
@@ -49,7 +51,9 @@ export default {
     };
   },
   setLegend() {
-    this.state.legend = this.state.isWorking ? 'Trabalho' : 'Intervalo';
+    const legend = this.state.isWorking ? 'Trabalho' : 'Intervalo';
+    this.state.legend = legend;
+    notifyManager.Notify(legend);
   },
   setTimer() {
     const timer = this.state.isWorking ? this.state.intervalTime : this.state.workTime;

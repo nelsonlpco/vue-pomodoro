@@ -25,8 +25,6 @@ export default {
   },
   methods: {
     onFocus(e) {
-      // console.log('focus', e, e.target.selectionStart, e.target.selectionEnd);
-      // e.target.setSelectionRange()
       e.target.select();
     },
     onKeyUp(e) {

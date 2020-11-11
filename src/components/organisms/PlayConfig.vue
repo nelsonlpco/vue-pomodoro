@@ -26,7 +26,6 @@ export default {
   methods: {
     getWindowWidth() {
       const containerMiddleWidth = this.$refs.container.$el.scrollWidth / 2 - 40;
-      console.log('aqui', containerMiddleWidth);
       this.store.setPlayConfigMiddleOfContainer(containerMiddleWidth);
     },
     startStopHandler() {
