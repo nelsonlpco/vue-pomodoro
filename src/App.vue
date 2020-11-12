@@ -8,6 +8,8 @@
 import Store from '@/store';
 import Theme from '@/theme/theme';
 
+Store.loadConfig();
+
 export default {
   name: 'App',
   provide() {

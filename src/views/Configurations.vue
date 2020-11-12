@@ -1,14 +1,14 @@
 <template>
   <Container>
     <Container margin="0 0 78px 0" width="100%">
-      <Title>Configurações</Title>
+      <Title>{{$t('configurations')}}</Title>
     </Container>
     <Container margin="0 0 58px 0">
-      <Subtitle>Tempo de trabalho</Subtitle>
+      <Subtitle>{{$t('workTime')}}</Subtitle>
       <TimeInput :minutes="minutes" :seconds="seconds" @keyup="changeWorkTime" />
     </Container>
     <Container margin="0 0 58px 0">
-      <Subtitle>Tempo de descanso</Subtitle>
+      <Subtitle>{{$t('intervalTime')}}</Subtitle>
       <TimeInput
         :minutes="intervalMinutes"
         :seconds="intervalSeconds"
@@ -67,6 +67,7 @@ export default {
       this.$router.push('/');
     },
     confirmHandler() {
+      this.store.saveConfig();
       this.$router.push('/');
     },
     changeWorkTime(v) {

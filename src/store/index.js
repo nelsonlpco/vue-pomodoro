@@ -1,4 +1,7 @@
 import notifyManager from './notificationManager';
+import { getMessage } from '../globalization/languages';
+
+console.log();
 
 const animations = {
   charge: 'charge',
@@ -14,9 +17,10 @@ export default {
     time: 0,
     currentTime: 0,
     isWorking: false,
+    isInterval: false,
     isStarted: false,
     animation: { animation: '' },
-    legend: 'Trabalho',
+    legend: getMessage('work'),
     playConfig: {
       middleOfContainer: 0,
       configAnimation: {
@@ -30,6 +34,11 @@ export default {
       },
     },
   },
+  setToggleFlags() {
+    this.state.isInterval = !this.state.isInterval;
+    this.state.isWorking = !this.state.isWorking;
+    this.state.isStarted = !this.state.isStarted;
+  },
   setWorkTime(time) {
     this.state.workTime = time;
   },
@@ -39,19 +48,8 @@ export default {
   setPlayConfigMiddleOfContainer(middleOfContainer) {
     this.state.playConfig.middleOfContainer = middleOfContainer;
   },
-  playConfigAnimation() {
-    this.state.playConfig.configAnimation = {
-      transform: `translateX(${(this.state.isStarted ? 1 : 0) * this.state.playConfig.middleOfContainer}px)`,
-      opacity: this.state.isStarted ? 0 : 1,
-      transition: 'transform 0.500s, opacity 0.500s',
-    };
-    this.state.playConfig.playAnimation = {
-      transform: `translateX(${(this.state.isStarted ? -1 : 0) * this.state.playConfig.middleOfContainer}px)`,
-      transition: 'transform 0.500s',
-    };
-  },
   setLegend() {
-    const legend = this.state.isWorking ? 'Trabalho' : 'Intervalo';
+    const legend = this.state.isWorking ? getMessage('work') : getMessage('interval');
     this.state.legend = legend;
     notifyManager.Notify(legend);
   },
@@ -64,6 +62,17 @@ export default {
   setDisplayAnimation() {
     this.state.animation = {
       animation: `${this.state.isWorking ? animations.charge : animations.recharge} ${this.state.time}s linear forwards`,
+    };
+  },
+  playConfigAnimation() {
+    this.state.playConfig.configAnimation = {
+      transform: `translateX(${(this.state.isStarted ? 1 : 0) * this.state.playConfig.middleOfContainer}px)`,
+      opacity: this.state.isStarted ? 0 : 1,
+      transition: 'transform 0.500s, opacity 0.500s',
+    };
+    this.state.playConfig.playAnimation = {
+      transform: `translateX(${(this.state.isStarted ? -1 : 0) * this.state.playConfig.middleOfContainer}px)`,
+      transition: 'transform 0.500s',
     };
   },
   updateState() {
@@ -99,5 +108,16 @@ export default {
     } else {
       this.start();
     }
+  },
+  saveConfig() {
+    localStorage.setItem('workTime', this.state.workTime);
+    localStorage.setItem('intervalTime', this.state.intervalTime);
+  },
+  loadConfig() {
+    const workTime = localStorage.getItem('workTime');
+    const intervalTime = localStorage.getItem('intervalTime');
+    console.log('loadingla', workTime, intervalTime);
+    this.state.workTime = workTime ? Number(workTime) : 60;
+    this.state.intervalTime = intervalTime ? Number(intervalTime) : 30;
   },
 };
