@@ -9,6 +9,7 @@ const messages = {
     configurations: 'Configurações',
     workTime: 'Tempo de trabalho',
     intervalTime: 'Tempo de Intervalo',
+    timeTo: 'Tempo de ',
   },
   'en-US': {
     work: 'Work',
@@ -17,6 +18,7 @@ const messages = {
     configurations: 'Configurations',
     workTime: 'Work Time',
     intervalTime: 'Interval Time',
+    timeTo: 'Time to ',
   },
 };
 

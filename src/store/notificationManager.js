@@ -20,7 +20,7 @@ async function requestPermission() {
   Notification.requestPermission();
 }
 
-async function Notify(message) {
+async function notify(message) {
   if (!hasSupportToNotification()) return;
 
   await Notification.requestPermission();
@@ -35,5 +35,5 @@ async function Notify(message) {
 
 export default {
   requestPermission,
-  Notify,
+  notify,
 };

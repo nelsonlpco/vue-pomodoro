@@ -1,7 +1,5 @@
-import notifyManager from './notificationManager';
 import { getMessage } from '../globalization/languages';
-
-console.log();
+import strategyManager from './strategies';
 
 const animations = {
   charge: 'charge',
@@ -14,10 +12,10 @@ export default {
   state: {
     workTime: 10,
     intervalTime: 5,
-    time: 0,
     currentTime: 0,
     isWorking: false,
     isInterval: false,
+    isLoop: true,
     isStarted: false,
     animation: { animation: '' },
     legend: getMessage('work'),
@@ -34,10 +32,11 @@ export default {
       },
     },
   },
-  setToggleFlags() {
-    this.state.isInterval = !this.state.isInterval;
-    this.state.isWorking = !this.state.isWorking;
-    this.state.isStarted = !this.state.isStarted;
+  processPomodoro() {
+    this.state.currentTime -= 1;
+    if (!this.state.currentTime) {
+      strategyManager.getStrategy(this);
+    }
   },
   setWorkTime(time) {
     this.state.workTime = time;
@@ -47,17 +46,6 @@ export default {
   },
   setPlayConfigMiddleOfContainer(middleOfContainer) {
     this.state.playConfig.middleOfContainer = middleOfContainer;
-  },
-  setLegend() {
-    const legend = this.state.isWorking ? getMessage('work') : getMessage('interval');
-    this.state.legend = legend;
-    notifyManager.Notify(legend);
-  },
-  setTimer() {
-    const timer = this.state.isWorking ? this.state.intervalTime : this.state.workTime;
-    this.state.isWorking = !this.state.isWorking;
-    this.state.currentTime = timer;
-    this.state.time = timer;
   },
   setDisplayAnimation() {
     this.state.animation = {
@@ -75,31 +63,27 @@ export default {
       transition: 'transform 0.500s',
     };
   },
-  updateState() {
-    this.setTimer();
-    this.setLegend();
-    this.setDisplayAnimation();
-    this.playConfigAnimation();
-  },
   start() {
     this.state.isStarted = true;
-    this.updateState();
+    this.state.isWorking = true;
+    this.state.isInterval = false;
+    this.state.currentTime = this.state.workTime;
+    this.state.legend = getMessage('work');
 
-    intervalRef = setInterval(() => {
-      if (this.state.currentTime) { this.state.currentTime -= 1; } else {
-        this.updateState();
-        if (!this.state.isStarted) { clearInterval(intervalRef); }
-      }
-    }, 1000);
+    this.setDisplayAnimation();
+    this.playConfigAnimation();
+
+    intervalRef = setInterval(() => this.processPomodoro(), 1000);
   },
   stop() {
+    this.state.currentTime = 0;
+    this.state.isWorking = false;
+    this.state.isInterval = false;
+    this.state.isStarted = false;
     clearInterval(intervalRef);
     this.state.animation = {
       animation: '',
     };
-    this.state.currentTime = 0;
-    this.state.isWorking = false;
-    this.state.isStarted = false;
     this.playConfigAnimation();
   },
   startStop() {
@@ -116,7 +100,6 @@ export default {
   loadConfig() {
     const workTime = localStorage.getItem('workTime');
     const intervalTime = localStorage.getItem('intervalTime');
-    console.log('loadingla', workTime, intervalTime);
     this.state.workTime = workTime ? Number(workTime) : 60;
     this.state.intervalTime = intervalTime ? Number(intervalTime) : 30;
   },
