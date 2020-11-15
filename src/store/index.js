@@ -13,8 +13,8 @@ export default {
   state: {
     requestNotificationPermission: !notificationManager.permissionRequested(),
     animationTime: 0,
-    workTime: 10,
-    intervalTime: 5,
+    workTime: 30,
+    intervalTime: 15,
     currentTime: 0,
     isWorking: false,
     isInterval: false,
@@ -46,6 +46,9 @@ export default {
     if (!this.state.currentTime) {
       strategyManager.getStrategy(this);
     }
+  },
+  setIsLoop(value) {
+    this.state.isLoop = value;
   },
   setWorkTime(time) {
     this.state.workTime = time;
@@ -115,11 +118,14 @@ export default {
   saveConfig() {
     localStorage.setItem('workTime', this.state.workTime);
     localStorage.setItem('intervalTime', this.state.intervalTime);
+    localStorage.setItem('isLoop', this.state.isLoop);
   },
   loadConfig() {
     const workTime = localStorage.getItem('workTime');
     const intervalTime = localStorage.getItem('intervalTime');
-    this.state.workTime = workTime ? Number(workTime) : 60;
-    this.state.intervalTime = intervalTime ? Number(intervalTime) : 30;
+    const isLoop = localStorage.getItem('isLoop');
+    this.state.workTime = workTime ? Number(workTime) : this.state.workTime;
+    this.state.intervalTime = intervalTime ? Number(intervalTime) : this.state.intervalTime;
+    this.state.isLoop = isLoop && isLoop === 'true';
   },
 };

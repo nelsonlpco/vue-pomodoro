@@ -4,16 +4,19 @@
       <Container margin="0 0 78px 0" width="100%">
         <Title>{{$t('configurations')}}</Title>
       </Container>
-      <Container margin="0 0 58px 0">
+      <Container margin="0 0 28px 0">
         <Subtitle>{{$t('workTime')}}</Subtitle>
         <TimeInput :minutes="minutes" :seconds="seconds" @keyup="changeWorkTime" />
       </Container>
-      <Container margin="0 0 58px 0">
+      <Container margin="0 0 28px 0">
         <Subtitle>{{$t('intervalTime')}}</Subtitle>
         <TimeInput
           :minutes="intervalMinutes"
           :seconds="intervalSeconds"
           @keyup="changeIntervalTime" />
+      </Container>
+      <Container margin="0 0 28px 0">
+        <LoopInput :isActive="store.state.isLoop" @change="onLoopChange"/>
       </Container>
       <Container direction="row">
         <Container margin="0 79px 0 0">
@@ -32,6 +35,7 @@ import Subtitle from '@/components/atoms/Subtitle.vue';
 import ButtonCancel from '@/components/molecules/buttons/ButtonCancel.vue';
 import ButtonConfirm from '@/components/molecules/buttons/ButtonConfirm.vue';
 import TimeInput from '@/components/molecules/TimeInput.vue';
+import LoopInput from '@/components/molecules/LoopInput.vue';
 
 export default {
   name: 'Configurations',
@@ -43,6 +47,7 @@ export default {
     ButtonCancel,
     ButtonConfirm,
     TimeInput,
+    LoopInput,
   },
   computed: {
     minutes() {
@@ -61,11 +66,13 @@ export default {
   data() {
     return {
       inputedTime: 0,
+      isLoop: false,
     };
   },
   methods: {
     cancelHandler() {
       this.store.setWorkTime(this.inputedTime);
+      this.store.setIsLoop(this.isLoop);
       this.$router.push('/');
     },
     confirmHandler() {
@@ -78,9 +85,13 @@ export default {
     changeIntervalTime(v) {
       this.store.setIntervalTime(Number(v));
     },
+    onLoopChange(value) {
+      this.store.setIsLoop(value);
+    },
   },
   mounted() {
     this.inputedTime = this.store.state.workTime;
+    this.isLoop = this.store.state.isLoop;
   },
 };
 </script>

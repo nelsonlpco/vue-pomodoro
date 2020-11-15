@@ -1,15 +1,18 @@
 <template>
   <input
-    class="time-input"
+    class="input"
+    :class="{'--active': isActive}"
     type="text"
-    placeholder="00"
-    :value="paddedNumber"
+    :placeholder="paddedNumber"
     @focus="onFocus"
+    @blur="onBlur"
     @keyup="onKeyUp"
     maxlength="2"/>
 </template>
 
 <script>
+let timeoutRef = null;
+
 export default {
   name: 'NumberInput',
   props: {
@@ -23,12 +26,25 @@ export default {
       return this.$props.value.toString().padStart(2, '0');
     },
   },
+  data() {
+    return {
+      isActive: false,
+    };
+  },
   methods: {
-    onFocus(e) {
-      e.target.select();
+    onFocus() {
+      this.isActive = true;
+    },
+    onBlur() {
+      this.isActive = false;
     },
     onKeyUp(e) {
-      this.$emit('change', e.target.value);
+      if (timeoutRef) {
+        clearTimeout(timeoutRef);
+      }
+      timeoutRef = setTimeout(() => {
+        this.$emit('change', e.target.value);
+      }, 400);
     },
   },
 };
@@ -37,7 +53,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../theme/theme.scss';
 
-.time-input {
+.input {
   color: $textColor;
   font-weight: bold;
   font-size: $font-size-timer-text;
@@ -47,5 +63,18 @@ export default {
   width: 69px;
   direction: rtl;
   overflow:hidden;
+
+  &::placeholder {
+    opacity: 1;
+    color: $textColor;
+  }
+
+  &.--active {
+    &::placeholder {
+      opacity: 0.5;
+      color: $textColor;
+    }
+  }
 }
+
 </style>

@@ -10,9 +10,6 @@
 import Container from '@/components/atoms/Container.vue';
 import NumberInput from '@/components/atoms/NumberInput.vue';
 
-let minuteTimeout = null;
-let secondsTimeout = null;
-
 export default {
   components: {
     Container,
@@ -37,25 +34,10 @@ export default {
   methods: {
     onChangeMinutes(v) {
       const time = Number(v) * 60 + Number(this.$props.seconds);
-
-      if (minuteTimeout) {
-        clearTimeout(minuteTimeout);
-      }
-
-      minuteTimeout = setTimeout(() => {
-        this.$emit('keyup', time.toString());
-      }, 400);
+      this.$emit('keyup', time);
     },
     onChangeSeconds(v) {
-      this.$emit('keyup', Number(v));
-
-      if (secondsTimeout) {
-        clearTimeout(secondsTimeout);
-      }
-
-      secondsTimeout = setTimeout(() => {
-        this.$emit('keyup', v.toString());
-      }, 400);
+      this.$emit('keyup', v.toString());
     },
   },
   mounted() {
@@ -64,7 +46,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>

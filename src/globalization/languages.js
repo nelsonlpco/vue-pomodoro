@@ -12,6 +12,7 @@ const messages = {
     timeTo: 'Tempo de ',
     notifications: 'Notificações',
     allowNotifications: 'Libera as notificações no seu browser para ser alertado nos intervalos de tempo.',
+    playInLoop: 'Executar sem parar',
   },
   'en-US': {
     work: 'Work',
@@ -23,13 +24,13 @@ const messages = {
     timeTo: 'Time to ',
     notifications: 'Notifications',
     allowNotifications: 'Allow the notifications on your browser for you to be notified on the time intervals',
+    playInLoop: 'Execute without stop',
   },
 };
 
 Vue.use(VueI18n);
 
 const locale = navigator.language || navigator.userLanguage;
-console.log(locale);
 
 const i18n = new VueI18n({
   locale: locale in messages ? locale : 'pt-BR',
