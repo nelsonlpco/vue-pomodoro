@@ -1,3 +1,4 @@
+import notificationManager from './notificationManager';
 import { getMessage } from '../globalization/languages';
 import strategyManager from './strategies';
 
@@ -10,6 +11,8 @@ let intervalRef = null;
 
 export default {
   state: {
+    requestNotificationPermission: !notificationManager.permissionRequested(),
+    animationTime: 0,
     workTime: 10,
     intervalTime: 5,
     currentTime: 0,
@@ -31,6 +34,12 @@ export default {
         transition: undefined,
       },
     },
+    timeTitleAnimation: '',
+    timeDisplayAnimation: '',
+  },
+  notificationRequested() {
+    this.state.requestNotificationPermission = false;
+    notificationManager.requestPermission();
   },
   processPomodoro() {
     this.state.currentTime -= 1;
@@ -49,7 +58,7 @@ export default {
   },
   setDisplayAnimation() {
     this.state.animation = {
-      animation: `${this.state.isWorking ? animations.charge : animations.recharge} ${this.state.time}s linear forwards`,
+      animation: `${this.state.isWorking ? animations.charge : animations.recharge} ${this.state.animationTime}s linear forwards`,
     };
   },
   playConfigAnimation() {
@@ -68,7 +77,10 @@ export default {
     this.state.isWorking = true;
     this.state.isInterval = false;
     this.state.currentTime = this.state.workTime;
+    this.state.animationTime = this.state.workTime;
     this.state.legend = getMessage('work');
+    this.state.timeTitleAnimation = 'upTitle';
+    this.state.timeDisplayAnimation = 'upDisplay';
 
     this.setDisplayAnimation();
     this.playConfigAnimation();
@@ -76,6 +88,7 @@ export default {
     intervalRef = setInterval(() => this.processPomodoro(), 1000);
   },
   stop() {
+    this.state.animationTime = 0;
     this.state.currentTime = 0;
     this.state.isWorking = false;
     this.state.isInterval = false;
@@ -85,6 +98,8 @@ export default {
       animation: '',
     };
     this.playConfigAnimation();
+    this.state.timeTitleAnimation = 'downTitle';
+    this.state.timeDisplayAnimation = 'downDisplay';
   },
   startStop() {
     if (this.state.isStarted) {
@@ -92,6 +107,10 @@ export default {
     } else {
       this.start();
     }
+  },
+  clearTimeAnimation() {
+    this.state.timeTitleAnimation = '';
+    this.state.timeDisplayAnimation = '';
   },
   saveConfig() {
     localStorage.setItem('workTime', this.state.workTime);

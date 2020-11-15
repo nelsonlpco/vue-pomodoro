@@ -1,26 +1,28 @@
 <template>
-  <Container>
-    <Container margin="0 0 78px 0" width="100%">
-      <Title>{{$t('configurations')}}</Title>
-    </Container>
-    <Container margin="0 0 58px 0">
-      <Subtitle>{{$t('workTime')}}</Subtitle>
-      <TimeInput :minutes="minutes" :seconds="seconds" @keyup="changeWorkTime" />
-    </Container>
-    <Container margin="0 0 58px 0">
-      <Subtitle>{{$t('intervalTime')}}</Subtitle>
-      <TimeInput
-        :minutes="intervalMinutes"
-        :seconds="intervalSeconds"
-        @keyup="changeIntervalTime" />
-    </Container>
-    <Container direction="row">
-      <Container margin="0 79px 0 0">
-        <ButtonCancel @click="cancelHandler" />
+  <transition enter-active-class="slidefadeIn" leave-active-class="slidefadeOut" appear>
+    <Container>
+      <Container margin="0 0 78px 0" width="100%">
+        <Title>{{$t('configurations')}}</Title>
       </Container>
-      <ButtonConfirm @click="confirmHandler" />
+      <Container margin="0 0 58px 0">
+        <Subtitle>{{$t('workTime')}}</Subtitle>
+        <TimeInput :minutes="minutes" :seconds="seconds" @keyup="changeWorkTime" />
+      </Container>
+      <Container margin="0 0 58px 0">
+        <Subtitle>{{$t('intervalTime')}}</Subtitle>
+        <TimeInput
+          :minutes="intervalMinutes"
+          :seconds="intervalSeconds"
+          @keyup="changeIntervalTime" />
+      </Container>
+      <Container direction="row">
+        <Container margin="0 79px 0 0">
+          <ButtonCancel @click="cancelHandler" />
+        </Container>
+        <ButtonConfirm @click="confirmHandler" />
+      </Container>
     </Container>
-  </Container>
+  </transition>
 </template>
 
 <script>
@@ -82,3 +84,38 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .slidefadeIn {
+    position: absolute ;
+    z-index: 1000;
+    animation: open 0.4s ease-in forwards;
+  }
+
+  .slidefadeOut {
+    position: absolute;
+    z-index: 1000;
+    animation: close 0.4s ease-out forwards;
+  }
+
+@keyframes open {
+    from {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+
+  @keyframes close {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+  }
+</style>

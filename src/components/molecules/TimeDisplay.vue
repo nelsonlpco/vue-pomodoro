@@ -2,10 +2,10 @@
   <Container>
     <Title
       class="title--absolute"
-      :class="{upTitle: isStarted, downTitle: !isStarted}">
-      Pomodoro
+      :class="timeTitleAnimation">
+      {{$t('pomodoro')}}
     </Title>
-    <Container :class="{upDisplay: isStarted, downDisplay: !isStarted}">
+    <Container class="hidden" :class="timeDisplayAnimation">
       <Time :minutes="onlyMinutes" :seconds="onlySeconds" />
       <Subtitle>{{legend}}</Subtitle>
     </Container>
@@ -30,6 +30,14 @@ export default {
     seconds: {
       type: Number,
       default: 0,
+    },
+    timeTitleAnimation: {
+      type: String,
+      default: '',
+    },
+    timeDisplayAnimation: {
+      type: String,
+      default: '',
     },
     isStarted: {
       type: Boolean,
@@ -60,6 +68,10 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../theme/theme.scss';
+
+  .hidden {
+    opacity: 0;
+  }
 
   .title--absolute {
     position: absolute;

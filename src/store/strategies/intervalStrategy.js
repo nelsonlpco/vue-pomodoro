@@ -8,7 +8,9 @@ export default {
     store.state.isWorking = false;
     store.state.isInterval = true;
     store.state.currentTime = store.state.intervalTime;
+    store.state.animationTime = store.state.intervalTime;
     store.state.legend = getMessage('interval');
+    store.setDisplayAnimation();
     notifyManager.notify(`${getMessage('timeTo')} ${getMessage('interval')}`);
   },
 };

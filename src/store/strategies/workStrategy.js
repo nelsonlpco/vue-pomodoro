@@ -9,7 +9,9 @@ export default {
   process: (store) => {
     store.state.isWorking = true;
     store.state.currentTime = store.state.workTime;
+    store.state.animationTime = store.state.workTime;
     store.state.legend = getMessage('work');
+    store.setDisplayAnimation();
     notifyManager.notify(`${getMessage('timeTo')} ${getMessage('work')}`);
   },
 };

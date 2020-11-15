@@ -10,6 +10,8 @@ const messages = {
     workTime: 'Tempo de trabalho',
     intervalTime: 'Tempo de Intervalo',
     timeTo: 'Tempo de ',
+    notifications: 'Notificações',
+    allowNotifications: 'Libera as notificações no seu browser para ser alertado nos intervalos de tempo.',
   },
   'en-US': {
     work: 'Work',
@@ -19,6 +21,8 @@ const messages = {
     workTime: 'Work Time',
     intervalTime: 'Interval Time',
     timeTo: 'Time to ',
+    notifications: 'Notifications',
+    allowNotifications: 'Allow the notifications on your browser for you to be notified on the time intervals',
   },
 };
 

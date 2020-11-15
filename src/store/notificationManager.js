@@ -33,7 +33,14 @@ async function notify(message) {
   }
 }
 
+function permissionRequested() {
+  if (!hasSupportToNotification()) return true;
+
+  return Notification.permission in notificationStatus;
+}
+
 export default {
+  permissionRequested,
   requestPermission,
   notify,
 };

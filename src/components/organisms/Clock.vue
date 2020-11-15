@@ -2,6 +2,8 @@
 <Container>
   <DisplayCircleTimer :animationStyle="store.state.animation">
     <TimeDisplay
+      :timeTitleAnimation="store.state.timeTitleAnimation"
+      :timeDisplayAnimation="store.state.timeDisplayAnimation"
       :isStarted="store.state.isStarted"
       :legend="store.state.legend"
       :seconds="store.state.currentTime"/>

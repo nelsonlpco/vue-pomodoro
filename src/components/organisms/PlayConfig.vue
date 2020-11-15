@@ -32,6 +32,7 @@ export default {
       this.$emit('click');
     },
     configHandler() {
+      this.store.clearTimeAnimation();
       this.$router.push('Configurations');
     },
   },

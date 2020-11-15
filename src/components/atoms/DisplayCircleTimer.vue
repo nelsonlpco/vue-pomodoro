@@ -5,11 +5,6 @@
           preserveAspectRatio="xMinYMid"
           :width="size"
           :height="size">
-          <defs>
-            <filter id="f1" x="0" y="0">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-            </filter>
-          </defs>
           <circle
             :cx="cx"
             :cy="cy"
@@ -18,19 +13,6 @@
             stroke-linecap="round"
             stroke-width="10"
             fill="none"
-          />
-          <circle
-            filter="url(#f1)"
-            :style="animationStyle"
-            :cx="cx"
-            :cy="cy"
-            :r="r"
-            stroke="#da755e"
-            stroke-linecap="round"
-            stroke-width="10"
-            fill="none"
-            stroke-dasharray="754"
-            stroke-dashoffset="754"
           />
           <circle
             :style="animationStyle"
